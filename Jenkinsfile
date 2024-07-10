@@ -1,4 +1,6 @@
 node {
+//pipeline {
+    //agent any
     def app
 
     stage('Clone repository') {
@@ -15,12 +17,12 @@ node {
                         sh "git config user.email sulaynd@gmail.com"
                         sh "git config user.name souleye"
                         //sh "git switch master"
-                        sh "cat deployment.yaml"
-                        sh "sed -i 's+sulaynd/test.*+sulaynd/test:${DOCKERTAG}+g' deployment.yaml"
-                        sh "cat deployment.yaml"
+                        sh "cat deployment.yml"
+                        sh "sed -i '' 's+sulaynd/ultimate-cicd.*+sulaynd/ultimate-cicd:${DOCKERTAG}+g' deployment.yml"
+                        sh "cat deployment.yml"
                         sh "git add ."
                         sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:main"
+                        sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/spring-boot-app-manifests.git HEAD:main"
       }
     }
   }
